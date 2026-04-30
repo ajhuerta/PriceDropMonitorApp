@@ -10,6 +10,8 @@ export default function App() {
   const [items, setItems] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [error, setError] = useState("");
+  // Incrementing this resets the polling interval and triggers an immediate fetch
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const fetchItems = useCallback(async () => {
     try {
@@ -24,7 +26,11 @@ export default function App() {
     fetchItems();
     const id = setInterval(fetchItems, POLL_INTERVAL_MS);
     return () => clearInterval(id);
-  }, [fetchItems]);
+  }, [fetchItems, refreshKey]);
+
+  function handleRefresh() {
+    setRefreshKey((k) => k + 1);
+  }
 
   async function handleAdd(data) {
     await createItem(data);
@@ -58,12 +64,12 @@ export default function App() {
     <div style={styles.page}>
       <header style={styles.header}>
         <h1 style={styles.title}>Price Drop Monitor</h1>
-        <span style={styles.subtitle}>Polls every 30s · Click a row to see history</span>
+        <span style={styles.subtitle}>Auto-refreshes every 30s</span>
       </header>
 
       {error && <p style={styles.error}>⚠ {error}</p>}
 
-      <AddItemForm onAdd={handleAdd} />
+      <AddItemForm onAdd={handleAdd} onRefresh={handleRefresh} />
 
       <div style={styles.card}>
         <ItemTable

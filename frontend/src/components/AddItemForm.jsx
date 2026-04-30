@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddItemForm({ onAdd }) {
+export default function AddItemForm({ onAdd, onRefresh }) {
   const [form, setForm] = useState({
     name: "",
     url: "",
@@ -38,7 +38,12 @@ export default function AddItemForm({ onAdd }) {
 
   return (
     <form onSubmit={handleSubmit} style={styles.form}>
-      <h2 style={styles.heading}>Add Item to Monitor</h2>
+      <div style={styles.headingRow}>
+        <h2 style={styles.heading}>Add Item to Monitor</h2>
+        <button type="button" onClick={onRefresh} style={styles.refreshBtn}>
+          ↻ Refresh
+        </button>
+      </div>
       {error && <p style={styles.error}>{error}</p>}
       <div style={styles.row}>
         <input
@@ -90,7 +95,18 @@ const styles = {
     padding: "20px 24px",
     marginBottom: 24,
   },
-  heading: { margin: "0 0 14px", fontSize: 16, color: "#cdd6f4" },
+  headingRow: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 },
+  heading: { margin: 0, fontSize: 16, color: "#cdd6f4" },
+  refreshBtn: {
+    padding: "5px 14px",
+    background: "transparent",
+    border: "1px solid #45475a",
+    borderRadius: 6,
+    color: "#89b4fa",
+    fontSize: 13,
+    fontWeight: 600,
+    cursor: "pointer",
+  },
   row: { display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" },
   input: {
     flex: 1,

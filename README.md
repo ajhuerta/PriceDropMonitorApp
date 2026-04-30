@@ -163,6 +163,29 @@ An alert fires when `current_price ≤ target_price`, with a 1-hour cooldown per
 
 ---
 
+## Running Tests
+
+### Backend
+
+```bash
+cd backend
+source venv/bin/activate   # Windows: venv\Scripts\activate
+python -m pytest tests/ -v
+```
+
+Covers: price parsing (scraper), ORM storage + cascade delete, scheduler logic (`_is_due`, `_maybe_send_alert`), and FastAPI endpoints (GET / POST / DELETE).
+
+### Frontend
+
+```bash
+cd frontend
+npm test -- --run
+```
+
+Covers: `ItemTable` price color logic + empty state, `AddItemForm` validation + submission, `PriceHistoryPanel` empty/populated states.
+
+---
+
 ## Notes
 
 - Amazon actively detects bots. If prices aren't scraping, check the backend logs — you may be hitting a CAPTCHA. Try reducing scrape frequency (`check_interval_minutes`).

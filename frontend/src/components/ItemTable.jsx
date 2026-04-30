@@ -93,9 +93,7 @@ export default function ItemTable({ items, onDelete, onToggle, onUpdate, onScrap
               style={{
                 ...styles.tr,
                 background: item.id === selectedId ? "#2a2a3e" : "transparent",
-                cursor: "pointer",
               }}
-              onClick={() => onSelectItem(item.id === selectedId ? null : item.id)}
             >
               {/* Name — editable */}
               <EditableCell
@@ -157,13 +155,19 @@ export default function ItemTable({ items, onDelete, onToggle, onUpdate, onScrap
               </td>
 
               {/* Actions */}
-              <td style={{ ...styles.td, whiteSpace: "nowrap" }} onClick={(e) => e.stopPropagation()}>
+              <td style={{ ...styles.td, whiteSpace: "nowrap" }}>
                 <button
                   style={styles.btnScrape}
                   disabled={scrapingId === item.id}
                   onClick={() => handleScrape(item.id)}
                 >
                   {scrapingId === item.id ? "…" : "Scrape"}
+                </button>
+                <button
+                  style={item.id === selectedId ? styles.btnHistoryActive : styles.btnHistory}
+                  onClick={() => onSelectItem(item.id === selectedId ? null : item.id)}
+                >
+                  History
                 </button>
                 <button style={styles.btnToggle} onClick={() => onToggle(item.id, !item.active)}>
                   {item.active ? "Pause" : "Resume"}
@@ -223,6 +227,8 @@ const styles = {
     boxSizing: "border-box",
   },
   btnScrape: { ...btn, background: "#89b4fa", color: "#1e1e2e" },
+  btnHistory: { ...btn, background: "#313244", color: "#cdd6f4", border: "1px solid #45475a" },
+  btnHistoryActive: { ...btn, background: "#cba6f7", color: "#1e1e2e" },
   btnToggle: { ...btn, background: "#45475a", color: "#cdd6f4" },
   btnDelete: { ...btn, background: "#f38ba8", color: "#1e1e2e" },
 };

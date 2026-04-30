@@ -1,0 +1,7 @@
+A 1-page design document (in the repo) that names at least three real tradeoffs you considered and why you chose the path you chose. Storage choice, scheduling approach, and notification strategy are fair game; so is anything else you found interesting:
+
+Some of the real tradeoffs I considered was using AWS EventBridge + AWS Lambda in order to schedule the scrapping but I decided against this approach as the architecture would have taken me longer to setup and validate than the 2 hours I set aside for the project. 
+
+I considered using MongoDB instead of SQLlite since the data for scraping is a bit more unstructured and would allow me longer term to make schema changes without worrying about altering tables and such but also similar to above, with only 2 hours, I wanted to focus on building something functional without having overhead of setting up a MongoDB database and keeping it simple with sqllite allows me to really easily change the data schema.
+
+For the notification strategy I knew I wanted to do something with email since I had the idea that I was the user of this app. I wouldn't want to watch the UI in order to find out whether there was a price drop and I was going to use Sendgrid until Claude had listed out steps on how to set it up with just my gmail account which I ended up going with to save additional time which let me fit in the unit tests in the 2 hour window.

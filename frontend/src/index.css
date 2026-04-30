@@ -1,0 +1,14 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #11111b;
+  color: #cdd6f4;
+  min-height: 100vh;
+}
+
+input::placeholder { color: #6c7086; }
+input:focus { border-color: #89b4fa !important; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #1e1e2e; }
+::-webkit-scrollbar-thumb { background: #45475a; border-radius: 3px; }

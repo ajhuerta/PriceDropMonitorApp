@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+backend/venv/
+venv/
+.venv/
+
+# Environment variables
+.env
+*.env
+
+# SQLite database
+*.db
+*.db-shm
+*.db-wal
+
+# Playwright
+backend/playwright-report/
+backend/test-results/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Frontend (handled by frontend/.gitignore but mirrored here)
+frontend/node_modules/
+frontend/dist/
+
+# Logs
+*.log

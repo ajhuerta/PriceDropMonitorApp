@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+apscheduler
+playwright
+playwright-stealth
+python-dotenv

@@ -17,6 +17,7 @@ export default function App() {
     try {
       const data = await getItems();
       setItems(data);
+      setError("");
     } catch (e) {
       setError(e.message);
     }

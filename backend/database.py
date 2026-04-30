@@ -9,8 +9,10 @@ engine = create_engine(SQLITE_URL, connect_args={"check_same_thread": False})
 @event.listens_for(engine, "connect")
 def set_wal_mode(dbapi_connection, _):
     cursor = dbapi_connection.cursor()
-    cursor.execute("PRAGMA journal_mode=WAL")
-    cursor.close()
+    try:
+        cursor.execute("PRAGMA journal_mode=WAL")
+    finally:
+        cursor.close()
 
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

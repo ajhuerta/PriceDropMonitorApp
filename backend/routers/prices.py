@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from database import get_db
@@ -9,7 +9,7 @@ router = APIRouter(prefix="/prices", tags=["prices"])
 
 
 @router.get("/{item_id}", response_model=list[PriceHistoryResponse])
-def get_price_history(item_id: int, limit: int = 50, db: Session = Depends(get_db)):
+def get_price_history(item_id: int, limit: int = Query(default=50, ge=1, le=500), db: Session = Depends(get_db)):
     item = db.query(MonitoredItem).filter(MonitoredItem.id == item_id).first()
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")

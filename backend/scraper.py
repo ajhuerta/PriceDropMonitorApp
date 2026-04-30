@@ -83,8 +83,7 @@ async def scrape_amazon_price(url: str) -> float | None:
             try:
                 await page.wait_for_selector(PRICE_WAIT_SELECTOR, timeout=8000)
             except Exception:
-                # Element didn't appear — page may still have a price via JS scan, continue anyway
-                pass
+                print("[scraper] Price container not found within 8s, attempting extraction anyway")
 
             title = await page.title()
             print(f"[scraper] Page title: {title}")
